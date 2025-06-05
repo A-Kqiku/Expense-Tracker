@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">methods </span><span class="s0">import </span><span class="s2">*</span>
+
+
+<span class="s1">app_status</span><span class="s2">: </span><span class="s1">bool</span><span class="s2">= </span><span class="s0">True</span>
+<span class="s1">amount_of_expense</span><span class="s2">: </span><span class="s1">int </span><span class="s2">= </span><span class="s3">0</span>
+<span class="s1">expenses </span><span class="s2">= {}</span>
+
+<span class="s1">menu_text</span><span class="s2">: </span><span class="s1">str </span><span class="s2">= </span><span class="s4">&quot;(1) Show Expenses (2) Add Expenses (3) Edit Expenses (4) Delete Expenses (5) Exit ?:&quot;</span>
+
+
+<span class="s0">while </span><span class="s1">app_status</span><span class="s2">:</span>
+    <span class="s1">user_input</span><span class="s2">: </span><span class="s1">int </span><span class="s2">= </span><span class="s1">int</span><span class="s2">(</span><span class="s1">input</span><span class="s2">(</span><span class="s1">menu_text</span><span class="s2">))</span>
+
+    <span class="s1">match user_input</span><span class="s2">:</span>
+        <span class="s1">case </span><span class="s3">1</span><span class="s2">:</span>
+            <span class="s1">show_expenses</span><span class="s2">(</span><span class="s1">expenses</span><span class="s2">)</span>
+        <span class="s1">case </span><span class="s3">2</span><span class="s2">:</span>
+            <span class="s1">add_expenses</span><span class="s2">(</span><span class="s1">expenses</span><span class="s2">, </span><span class="s1">amount_of_expense</span><span class="s2">)</span>
+        <span class="s1">case </span><span class="s3">3</span><span class="s2">:</span>
+            <span class="s1">show_expenses</span><span class="s2">(</span><span class="s1">expenses</span><span class="s2">)</span>
+            <span class="s1">edit_expenses</span><span class="s2">(</span><span class="s1">expenses</span><span class="s2">)</span>
+        <span class="s1">case </span><span class="s3">4</span><span class="s2">:</span>
+            <span class="s1">delete_expenses</span><span class="s2">(</span><span class="s1">expenses</span><span class="s2">)</span>
+        <span class="s1">case </span><span class="s3">5</span><span class="s2">:</span>
+            <span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Bye&quot;</span><span class="s2">)</span>
+            <span class="s1">app_status </span><span class="s2">= </span><span class="s0">False</span>
+        <span class="s1">case _</span><span class="s2">:</span>
+            <span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Invalid input&quot;</span><span class="s2">)</span>
+</pre>
+</body>
+</html>
