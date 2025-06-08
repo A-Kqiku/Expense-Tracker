@@ -1,14 +1,18 @@
-class Expense:
-    __slots__ = ("label", "date", "amount", "category")
+from dataclasses import dataclass
+from datetime import date as dt_date
 
-    def __init__(self, label: str, date: str, amount: float, category: str) -> None:
-        self.label = label
-        self.date = date
-        self.amount = amount
-        self.category = category
+@dataclass
+class Expense:
+    label: str
+    date: dt_date
+    amount: float
+    category: str
 
     def __str__(self) -> str:
-        return f"\n label: {self.label} \n date: {self.date} \n amount: {self.amount:.2f}€ \n Category: {self.category}"
+        return (f"\n label: {self.label} "
+                f"\n date: {self.date.strftime('%d.%m.%Y')} "
+                f"\n amount: {self.amount:.2f}€ "
+                f"\n category: {self.category}")
 
 
 

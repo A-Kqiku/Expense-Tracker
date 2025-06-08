@@ -27,6 +27,12 @@ manager.py</font>
         <span class="s1">self</span><span class="s2">.</span><span class="s1">all_expenses </span><span class="s2">= []</span>
         <span class="s1">self</span><span class="s2">.</span><span class="s1">amount_spent </span><span class="s2">= </span><span class="s3">0.0</span>
 
+    <span class="s0">def </span><span class="s1">is_empty</span><span class="s2">(</span><span class="s1">self</span><span class="s2">) </span><span class="s1">-&gt; bool</span><span class="s2">:</span>
+        <span class="s0">if </span><span class="s1">len</span><span class="s2">(</span><span class="s1">self</span><span class="s2">.</span><span class="s1">all_expenses</span><span class="s2">) == </span><span class="s3">0</span><span class="s2">:</span>
+            <span class="s0">return True</span>
+        <span class="s0">else</span><span class="s2">:</span>
+            <span class="s0">return False</span>
+
     <span class="s0">def </span><span class="s1">add</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">expense</span><span class="s2">: </span><span class="s1">Expense</span><span class="s2">):</span>
         <span class="s1">self</span><span class="s2">.</span><span class="s1">all_expenses</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">expense</span><span class="s2">)</span>
         <span class="s1">self</span><span class="s2">.</span><span class="s1">amount_spent </span><span class="s2">+= </span><span class="s1">expense</span><span class="s2">.</span><span class="s1">amount</span>
@@ -35,16 +41,22 @@ manager.py</font>
         <span class="s1">self</span><span class="s2">.</span><span class="s1">all_expenses</span><span class="s2">[</span><span class="s1">index</span><span class="s2">].</span><span class="s1">remove</span><span class="s2">()</span>
         <span class="s1">self</span><span class="s2">.</span><span class="s1">amount_spent </span><span class="s2">-= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">all_expenses</span><span class="s2">[</span><span class="s1">index</span><span class="s2">].</span><span class="s1">amount</span>
 
-    <span class="s0">def </span><span class="s1">edit</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">index</span><span class="s2">: </span><span class="s1">int</span><span class="s2">, </span><span class="s1">attr </span><span class="s2">, </span><span class="s1">value</span><span class="s2">):</span>
-        <span class="s1">self</span><span class="s2">.</span><span class="s1">all_expenses</span><span class="s2">[</span><span class="s1">index</span><span class="s2">].</span><span class="s1">attr </span><span class="s2">= </span><span class="s1">value</span>
+    <span class="s0">def </span><span class="s1">edit</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">index</span><span class="s2">: </span><span class="s1">int</span><span class="s2">, </span><span class="s1">attr</span><span class="s2">, </span><span class="s1">value</span><span class="s2">):</span>
+        <span class="s1">expense </span><span class="s2">= </span><span class="s1">self</span><span class="s2">.</span><span class="s1">all_expenses</span><span class="s2">[</span><span class="s1">index</span><span class="s2">]</span>
 
-    <span class="s0">def </span><span class="s1">list</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s0">if not </span><span class="s1">hasattr</span><span class="s2">(</span><span class="s1">expense</span><span class="s2">, </span><span class="s1">attr</span><span class="s2">):</span>
+            <span class="s0">raise </span><span class="s1">AttributeError</span><span class="s2">(</span><span class="s4">f&quot;</span><span class="s0">{</span><span class="s1">expense</span><span class="s2">.</span><span class="s1">__class__</span><span class="s2">.</span><span class="s1">__name__</span><span class="s0">} </span><span class="s4">has no attribute </span><span class="s0">{</span><span class="s1">attr</span><span class="s0">!r}</span><span class="s4">&quot;</span><span class="s2">)</span>
+
+        <span class="s1">setattr</span><span class="s2">(</span><span class="s1">expense</span><span class="s2">, </span><span class="s1">attr</span><span class="s2">, </span><span class="s1">value</span><span class="s2">)</span>
+
+    <span class="s0">def </span><span class="s1">list</span><span class="s2">(</span><span class="s1">self</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s0">None</span><span class="s2">:</span>
         <span class="s0">if not </span><span class="s1">self</span><span class="s2">.</span><span class="s1">all_expenses</span><span class="s2">:</span>
             <span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;No expenses recorded.&quot;</span><span class="s2">)</span>
             <span class="s0">return</span>
         <span class="s0">for </span><span class="s1">expense </span><span class="s0">in </span><span class="s1">self</span><span class="s2">.</span><span class="s1">all_expenses</span><span class="s2">:</span>
             <span class="s1">print</span><span class="s2">(</span><span class="s4">f&quot;- </span><span class="s0">{</span><span class="s1">self</span><span class="s2">.</span><span class="s1">all_expenses</span><span class="s2">.</span><span class="s1">index</span><span class="s2">(</span><span class="s1">expense</span><span class="s2">)</span><span class="s0">} </span><span class="s4">:  </span><span class="s0">{</span><span class="s1">expense</span><span class="s0">}</span><span class="s4">&quot;</span><span class="s2">)</span>
 
-</pre>
+    <span class="s0">def </span><span class="s1">get_expenses</span><span class="s2">(</span><span class="s1">self</span><span class="s2">) </span><span class="s1">-&gt; list</span><span class="s2">:</span>
+        <span class="s0">return </span><span class="s1">self</span><span class="s2">.</span><span class="s1">all_expenses</span></pre>
 </body>
 </html>
